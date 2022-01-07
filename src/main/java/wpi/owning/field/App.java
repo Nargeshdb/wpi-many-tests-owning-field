@@ -2,6 +2,7 @@ package wpi.owning.field;
 
 import org.checkerframework.checker.calledmethods.qual.EnsuresCalledMethods;
 import org.checkerframework.checker.mustcall.qual.MustCall;
+import java.io.IOException;
 
 @MustCall("finalizer") class App {
     private final Foo checkFieldsFoo;
@@ -44,9 +45,24 @@ import org.checkerframework.checker.mustcall.qual.MustCall;
             ff.a();
         }
 
+        public void notOwningFoo(Foo f) {
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                f.a();
+            }
+        }
+
         public void owningFooTest() {
             Foo f = new Foo();
-            owningFoo(f);
+            Foo ff = returnAlias(f);
+            owningFoo(ff);
+        }
+
+        public void notOwningFooTest() {
+            Foo f = new Foo();
+            Foo ff = returnAlias(f);
+            notOwningFoo(ff);
         }
 
         @EnsuresCalledMethods(
