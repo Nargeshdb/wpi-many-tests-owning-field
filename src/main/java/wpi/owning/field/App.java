@@ -44,6 +44,11 @@ import org.checkerframework.checker.mustcall.qual.MustCall;
             ff.a();
         }
 
+        public void owningFooTest() {
+            Foo f = new Foo();
+            owningFoo(f);
+        }
+
         @EnsuresCalledMethods(
                 value = {"this.finalOwningFoo"},
                 methods = {"a"})
