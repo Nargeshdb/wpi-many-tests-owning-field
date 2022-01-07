@@ -34,6 +34,16 @@ import org.checkerframework.checker.mustcall.qual.MustCall;
             this.finalOwningFoo = new Foo();
         }
 
+        public Foo returnAlias(Foo f) {
+            Foo ff = f;
+            return ff;
+        }
+
+        public void owningFoo(Foo f) {
+            Foo ff = returnAlias(f);
+            ff.a();
+        }
+
         @EnsuresCalledMethods(
                 value = {"this.finalOwningFoo"},
                 methods = {"a"})
