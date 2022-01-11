@@ -47,7 +47,11 @@ import java.io.IOException;
 
         public void notOwningFoo(Foo f) {
             try {
-                throw new IOException();
+                if (1 == 2) {
+                    throw new IOException();
+                } else {
+                    return;
+                }
             } catch (IOException e) {
                 f.a();
             }
