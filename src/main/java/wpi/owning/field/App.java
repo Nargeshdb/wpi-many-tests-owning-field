@@ -4,7 +4,7 @@ import org.checkerframework.checker.calledmethods.qual.EnsuresCalledMethods;
 import org.checkerframework.checker.mustcall.qual.MustCall;
 import java.io.IOException;
 
-@MustCall("finalizer") class App {
+class App {
     private final Foo checkFieldsFoo;
 
     public App() {
@@ -28,7 +28,7 @@ import java.io.IOException;
         return new Foo();
     }
 
-    @MustCall("b") static class FooField {
+    static class FooField {
         private final Foo finalOwningFoo;
 
         public FooField() {
@@ -45,17 +45,17 @@ import java.io.IOException;
             ff.a();
         }
 
-        public void notOwningFoo(Foo f) {
-            try {
-                if (1 == 2) {
-                    throw new IOException();
-                } else {
-                    return;
-                }
-            } catch (IOException e) {
-                f.a();
-            }
-        }
+//        public void notOwningFoo(Foo f) {
+//            try {
+//                if (1 == 2) {
+//                    throw new IOException();
+//                } else {
+//                    return;
+//                }
+//            } catch (IOException e) {
+//                f.a();
+//            }
+//        }
 
         public void owningFooTest() {
             Foo f = new Foo();
@@ -63,11 +63,11 @@ import java.io.IOException;
             owningFoo(ff);
         }
 
-        public void notOwningFooTest() {
-            Foo f = new Foo();
-            Foo ff = returnAlias(f);
-            notOwningFoo(ff);
-        }
+//        public void notOwningFooTest() {
+//            Foo f = new Foo();
+//            Foo ff = returnAlias(f);
+//            notOwningFoo(ff);
+//        }
 
         @EnsuresCalledMethods(
                 value = {"this.finalOwningFoo"},
