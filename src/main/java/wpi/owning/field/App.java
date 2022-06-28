@@ -1,7 +1,7 @@
 package wpi.owning.field;
 
 import org.checkerframework.checker.calledmethods.qual.EnsuresCalledMethods;
-import org.checkerframework.checker.mustcall.qual.MustCall;
+import org.checkerframework.checker.mustcall.qual.InheritableMustCall;
 import java.io.IOException;
 
 class App {
@@ -18,7 +18,7 @@ class App {
         this.checkFieldsFoo.a();
     }
 
-    @MustCall("a") static class Foo {
+    @InheritableMustCall("a") static class Foo {
         void a() {}
 
         void c() {}
