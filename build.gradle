@@ -41,5 +41,5 @@ tasks.withType(JavaCompile).configureEach {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'wpi.owning.field.App'
+    mainClass = 'wpi.owning.field.App'
 }
