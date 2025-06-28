@@ -24,6 +24,7 @@ dependencies {
 }
 
 tasks.withType(JavaCompile).configureEach {
+    options.release = 11
     if (JavaVersion.current() >= JavaVersion.VERSION_16) {
         options.fork = true
         options.forkOptions.jvmArgs += [
